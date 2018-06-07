@@ -14,7 +14,7 @@ const books =
   ]
 
 const numberOfPowersFN = (book, books) => {
-  for (let i = 0; i <= books.length; i++)
+  for (let i = 0; i < books.length; i++)
     if (book === books[i])
       return i
 }
@@ -34,20 +34,52 @@ const listDOM = (title, value) => {
 
 let posts = parseInt((document.getElementsByClassName('row_data')[1].childNodes[0].data).replace('.', ''))
 
-let characterSheet = document.querySelectorAll('#custom_fields_personaje ul li .row_data')
-let currentLevel = parseInt(characterSheet[0].textContent)
-let galleons = parseInt(characterSheet[2].textContent)
-let book = characterSheet[6].textContent
-book = book.split("\n").join("")
-book = book.split("\t").join("")
-let pointsObjects = parseInt(characterSheet[8].textContent)
-let pointsCreatures = parseInt(characterSheet[9].textContent)
-let knowledges = characterSheet[16].textContent.trim()
-let numberOfKnowledges = knowledges.split('\n').length
-let skills = characterSheet[17].textContent.trim()
-let numberOfSkills = skills.split('\n').length
-let badges = parseInt(characterSheet[18].textContent)
+let labels = document.querySelectorAll('#custom_fields_personaje ul li .row_title')
+let data = document.querySelectorAll('#custom_fields_personaje ul li .row_data')
+
+let currentLevel = 0
+let galleons = 0
+let book = ""
+let pointsObjects = 0
+let pointsCreatures = 0
+let knowledges = ""
+let skills = ""
+let badges = 0
+
+
+
+for(let i=0; i<data.length; i++){
+  switch (labels[i].textContent.trim()) {
+    case "Nivel Mágico":
+      currentLevel = data[i].textContent.trim()
+      break
+    case "Galeones":
+      galleons = parseInt(data[i].textContent.trim())
+      break
+    case "Libros de Hechizos":
+      book = data[i].textContent.trim()
+      break
+    case "Puntos de Poder en Objetos":
+      pointsObjects = parseInt(data[i].textContent.trim())
+      break
+    case "Puntos de Poder en Criaturas":
+      pointsCreatures = parseInt(data[i].textContent.trim())
+      break
+    case "Conocimientos":
+      knowledges = data[i].textContent.trim()
+      break
+    case "Habilidades Mágicas":
+      skills = data[i].textContent.trim()
+      break
+    case "Medallas":
+      badges = parseInt(data[i].textContent.trim())
+      break
+  }
+}
+
 let numberOfPowers = numberOfPowersFN(book, books)
+let numberOfKnowledges = knowledges !== "" ? knowledges.split('\n').length : 0
+let numberOfSkills = skills !== "" ? skills.split('\n').length : 0
 
 
 let postsExperience = 5 * (posts > 10000 ? 10000 : posts)

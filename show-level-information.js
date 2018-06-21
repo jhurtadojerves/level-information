@@ -8,21 +8,21 @@
 // @grant        none
 // ==/UserScript==
 (function() {
-  'use strict';
+  'use strict'
   
   const books =
           [
-            "",
-            "Libro del Aprendiz de Brujo (N.1)",
-            "Libro de la Fortaleza (N.5)" ,
-            "Libro de la Sangre (N.7)",
-            "Libro del Equilibrio (N.10)",
-            "Libro del Druida (N.15)",
-            "Libro del Caos (N.20)",
-            "Libro de los Ancestros (N.25)",
-            "Libro de las Auras (N.30)",
-            "Libro de Hermes Trimegisto (N.35)",
-            "Libro de Merlín (N.40)"
+            '',
+            'Libro del Aprendiz de Brujo (N.1)',
+            'Libro de la Fortaleza (N.5)' ,
+            'Libro de la Sangre (N.7)',
+            'Libro del Equilibrio (N.10)',
+            'Libro del Druida (N.15)',
+            'Libro del Caos (N.20)',
+            'Libro de los Ancestros (N.25)',
+            'Libro de las Auras (N.30)',
+            'Libro de Hermes Trimegisto (N.35)',
+            'Libro de Merlín (N.40)'
           ]
   
   const numberOfPowersFN = (book, books) => {
@@ -44,11 +44,54 @@
     return liElement
   }
   
-  const maxNumberOfKnowledge = _currentLevel => {
-    
-    
-    
-    return _currentLevel
+  const between = (value, min, max) => value >= min && value <= max
+  
+  const maxNumberOfKnowledge = {
+    '1': 3, '2': 3, '3': 3,
+    '4': 4, '5': 4, '6': 4,
+    '7': 5, '8': 5, '9': 5,
+    '10': 6, '11': 6, '12': 6,
+    '13': 7, '14': 7, '15': 7,
+    '16': 8, '17': 8, '18': 8,
+    '19': 9, '20': 9, '21': 9,
+    '22': 10, '23': 10, '24': 10,
+    '25': 11, '26': 11, '27': 11,
+    '28': 12, '29': 12, '30': 12,
+    '31': 13, '32': 13, '33': 13,
+    '34': 14, '35': 14, '36': 14,
+    '37': 15, '38': 15, '39': 15,
+    '40': 16, '41': 16, '42': 16,
+    '43': 17, '44': 17, '45': 17,
+    '46': 18, '47': 18, '48': 18,
+    '49': 19, '50': 19,
+  }
+  
+  const maxCreaturesLevel = _currentLevel => {
+    if (between(_currentLevel, 40, 50))
+      return 'XXXXX'
+    if (between(_currentLevel, 20, 39))
+      return 'XXXX'
+    if(between(_currentLevel, 10, 19))
+      return 'XXX'
+    if(between(_currentLevel, 5, 9))
+      return 'XX'
+    return 'X'
+  }
+  
+  const maxNumberOfSkills = () => {
+    if  (currentLevel >= 40 && numberOfKnowledges >= 10)
+      return 'Sin límite'
+    if  (currentLevel >= 35 && numberOfKnowledges >= 9)
+      return '5'
+    if  (currentLevel >= 30 && numberOfKnowledges >= 8)
+      return '4'
+    if  (currentLevel >= 25 && numberOfKnowledges >= 7)
+      return '3'
+    if  (currentLevel >= 20 && numberOfKnowledges >= 6)
+      return '2'
+    if  (currentLevel >= 15 && numberOfKnowledges >= 5)
+      return '1'
+    return "No puedes adquirir habilidades"
   }
   
   let posts = parseInt((document.getElementsByClassName('row_data')[1].childNodes[0].data).replace('.', ''))
@@ -58,47 +101,47 @@
   
   let currentLevel = 0
   let galleons = 0
-  let book = ""
+  let book = ''
   let pointsObjects = 0
   let pointsCreatures = 0
-  let knowledges = ""
-  let skills = ""
+  let knowledges = ''
+  let skills = ''
   let badges = 0
   
   
   
   for(let i=0; i<data.length; i++){
     switch (labels[i].textContent.trim()) {
-      case "Nivel Mágico":
+      case 'Nivel Mágico':
         currentLevel = data[i].textContent.trim()
         break
-      case "Galeones":
+      case 'Galeones':
         galleons = parseInt(data[i].textContent.trim())
         break
-      case "Libros de Hechizos":
+      case 'Libros de Hechizos':
         book = data[i].textContent.trim()
         break
-      case "Puntos de Poder en Objetos":
+      case 'Puntos de Poder en Objetos':
         pointsObjects = parseInt(data[i].textContent.trim())
         break
-      case "Puntos de Poder en Criaturas":
+      case 'Puntos de Poder en Criaturas':
         pointsCreatures = parseInt(data[i].textContent.trim())
         break
-      case "Conocimientos":
+      case 'Conocimientos':
         knowledges = data[i].textContent.trim()
         break
-      case "Habilidades Mágicas":
+      case 'Habilidades Mágicas':
         skills = data[i].textContent.trim()
         break
-      case "Medallas":
+      case 'Medallas':
         badges = parseInt(data[i].textContent.trim())
         break
     }
   }
   
   let numberOfPowers = numberOfPowersFN(book, books)
-  let numberOfKnowledges = knowledges !== "" ? knowledges.split('\n').length : 0
-  let numberOfSkills = skills !== "" ? skills.split('\n').length : 0
+  let numberOfKnowledges = knowledges !== '' ? knowledges.split('\n').length : 0
+  let numberOfSkills = skills !== '' ? skills.split('\n').length : 0
   
   
   let postsExperience = 5 * (posts > 10000 ? 10000 : posts)
@@ -114,23 +157,27 @@
   let newLevel = Math.round(allExperience/10000)
   let nextLevel = (((newLevel + 1) * 10000) - 5000) - allExperience
   
+  let maxKnowledge = currentLevel===0 ? 0 : currentLevel > 50 ? 19 : maxNumberOfKnowledge[currentLevel.toString()]
   
   const container = document.getElementsByClassName('ipsLayout_content')[1]
-  
   let levelBox = document.createElement('div')
+  
   levelBox.addClassName('general_box clearfix')
-  
   let levelTitle = document.createElement('h3')
-  levelTitle.textContent = 'Nivel de Experiencia Calculado'
   
+  levelTitle.textContent = 'Cálculos de Experiencia'
   let levelList = document.createElement('ul')
+  
   levelList.addClassName('ipsList_data clearfix')
   
-  levelList.appendChild(listDOM('Nivel', newLevel))
+  ///////////////////////////////////////////////
+  ///////////Set values in the dom///////////////
+  ///////////////////////////////////////////////
+  levelList.appendChild(listDOM('Nivel Calculado', newLevel))
   levelList.appendChild(listDOM('Experiencia para el próximo nivel', Math.round(nextLevel)))
-  
-  let maxKnowledge = maxNumberOfKnowledge(currentLevel)
-  
+  levelList.appendChild(listDOM('Máximo de Conocimientos', maxKnowledge))
+  levelList.appendChild(listDOM('Máximo de Habilidades', maxNumberOfSkills()))
+  levelList.appendChild(listDOM('Máximo nivel de Criaturas', maxCreaturesLevel(currentLevel)))
   
   
   levelBox.appendChild(levelTitle)
@@ -140,4 +187,4 @@
   
   
   container.insertBefore(levelBox, container.firstChild)
-})();
+})()

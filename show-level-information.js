@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Show next level yn every profile
+// @name         Show next level in every profile
 // @namespace    http://tampermonkey.net/
 // @version      1.0.0
 // @description  try to take over the world!

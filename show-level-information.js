@@ -173,6 +173,7 @@
   ///////////////////////////////////////////////
   ///////////Set values in the dom///////////////
   ///////////////////////////////////////////////
+  levelList.appendChild(listDOM('Experiencia Acumulada', allExperience))
   levelList.appendChild(listDOM('Nivel Calculado', newLevel))
   levelList.appendChild(listDOM('Experiencia para el próximo nivel', Math.round(nextLevel)))
   levelList.appendChild(listDOM('Máximo de Conocimientos', maxKnowledge))

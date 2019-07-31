@@ -46,6 +46,33 @@
   
   const between = (value, min, max) => value >= min && value <= max
   
+  const range = level => {
+    if (team == 'Orden del Fénix') {
+      if (between(level, 1, 9))
+        return 'Initie'
+      else if (between(level, 10, 21))
+        return 'Legionario'
+      else if (between(level, 22, 36))
+        return 'Templario'
+      else if (between(level, 37, 55))
+        return 'Knight'
+      else if (between(level, 56, 60))
+        return 'Demon Hunter'
+    }
+    else if (team == 'Marca Tenebrosa') {
+      if (between(level, 1, 9))
+        return 'Base'
+      else if (between(level, 10, 21))
+        return 'Tempestad'
+      else if (between(level, 22, 36))
+        return 'Mago Oscuro'
+      else if (between(level, 37, 55))
+        return 'Nigromante'
+      else if (between(level, 56, 60))
+        return 'Ángel Caído'
+    }
+  }
+
   const maxNumberOfKnowledge = {
     '1': 3, '2': 3, '3': 3,
     '4': 4, '5': 4, '6': 4,
@@ -107,8 +134,10 @@
   let knowledges = ''
   let skills = ''
   let badges = 0
-  
-  
+  let team = ''
+  let currentTeamRange = 'No perteneces a ningún bando'
+  let calculatedTeamRange = 'No perteneces a ningún bando'
+
   
   for(let i=0; i<data.length; i++){
     switch (labels[i].textContent.trim()) {
@@ -135,6 +164,9 @@
         break
       case 'Medallas':
         badges = parseInt(data[i].textContent.trim())
+        break
+      case 'Bando':
+        team = data[i].textContent.trim()
         break
     }
   }
@@ -175,6 +207,25 @@
   ///////////////////////////////////////////////
   levelList.appendChild(listDOM('Experiencia Acumulada', allExperience))
   levelList.appendChild(listDOM('Nivel Calculado', newLevel))
+  
+  /**
+   * Set range value in the dom
+   * 
+   */
+  currentTeamRange = range(parseInt(currentLevel))
+  calculatedTeamRange = range(parseInt(newLevel))
+
+
+
+  levelList.appendChild(listDOM('Rango en el Bando (actual)', currentTeamRange))
+  levelList.appendChild(listDOM('Rango en el Bando (calculado)', calculatedTeamRange))
+
+
+
+   /**
+    * End set range
+    */
+
   levelList.appendChild(listDOM('Experiencia para el próximo nivel', Math.round(nextLevel)))
   levelList.appendChild(listDOM('Máximo de Conocimientos', maxKnowledge))
   levelList.appendChild(listDOM('Máximo de Habilidades', maxNumberOfSkills()))

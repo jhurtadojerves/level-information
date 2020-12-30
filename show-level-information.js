@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show next level in every profile
 // @namespace    http://www.harrylatino.org/
-// @version      2.0.1
+// @version      2.0.2
 // @description  try to take over the world!
 // @author       You
 // @match        http://www.harrylatino.org/user/*
@@ -108,7 +108,7 @@
     "46": 18,
     "47": 18,
     "48": 18,
-    "49": 24,
+    "49": 23,
     "50": 24,
     "51": 24,
     "52": 24,
@@ -151,7 +151,9 @@
   };
 
   const maxNumberOfSkills = () => {
-    if (currentLevel >= 40 && numberOfKnowledges >= 10) return "Sin límite";
+    if (currentLevel >= 50 && numberOfKnowledges >= 10)
+      return "Todas las Habilidades";
+    if (currentLevel >= 40 && numberOfKnowledges >= 10) return "7";
     if (currentLevel >= 35 && numberOfKnowledges >= 9) return "5";
     if (currentLevel >= 30 && numberOfKnowledges >= 8) return "4";
     if (currentLevel >= 25 && numberOfKnowledges >= 7) return "3";
@@ -228,7 +230,7 @@
   let creaturesExperience =
     25 * (pointsCreatures > 3000 ? 3000 : pointsCreatures);
   let knowledegesExperience =
-    4000 * (numberOfKnowledges > 23 ? 23 : numberOfKnowledges);
+    4000 * (numberOfKnowledges > 24 ? 24 : numberOfKnowledges);
   let skillsExperience = 12000 * (numberOfSkills > 11 ? 11 : numberOfSkills);
   let powersExperience = 6000 * (numberOfPowers > 10 ? 10 : numberOfPowers);
   let badgesExperience = badges;

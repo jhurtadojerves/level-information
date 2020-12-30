@@ -1,6 +1,6 @@
 {
   "name": "level-information",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Show next level in every profile",
   "main": "index.js",
   "scripts": {

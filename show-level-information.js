@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show next level in every profile
 // @namespace    http://www.harrylatino.org/
-// @version      2.0.2
+// @version      2.0.3
 // @description  try to take over the world!
 // @author       You
 // @match        http://www.harrylatino.org/user/*
@@ -250,8 +250,8 @@
   let maxKnowledge =
     currentLevel === 0
       ? 0
-      : currentLevel > 50
-      ? 23
+      : currentLevel >= 50
+      ? 24
       : maxNumberOfKnowledge[currentLevel.toString()];
 
   const container = document.getElementsByClassName("ipsLayout_content")[1];

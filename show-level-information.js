@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Show next level in every profile
 // @namespace    http://www.harrylatino.org/
-// @version      1.1.2
+// @version      2.0.1
 // @description  try to take over the world!
 // @author       You
 // @match        http://www.harrylatino.org/user/*
 // @grant        none
 // ==/UserScript==
-(function() {
+(function () {
   "use strict";
 
   const books = [
@@ -21,7 +21,7 @@
     "Libro de los Ancestros (N.25)",
     "Libro de las Auras (N.30)",
     "Libro de Hermes Trimegisto (N.35)",
-    "Libro de Merlín (N.40)"
+    "Libro de Merlín (N.40)",
   ];
 
   const numberOfPowersFN = (book, books) => {
@@ -43,7 +43,7 @@
 
   const between = (value, min, max) => value >= min && value <= max;
 
-  const range = level => {
+  const range = (level) => {
     if (team == "Orden del Fénix") {
       if (between(level, 1, 9)) return "Initie";
       else if (between(level, 10, 21)) return "Legionario";
@@ -108,12 +108,42 @@
     "46": 18,
     "47": 18,
     "48": 18,
-    "49": 19,
-    "50": 19
+    "49": 24,
+    "50": 24,
+    "51": 24,
+    "52": 24,
+    "53": 24,
+    "54": 24,
+    "55": 24,
+    "56": 24,
+    "57": 24,
+    "58": 24,
+    "59": 24,
+    "60": 24,
+    "61": 24,
+    "62": 24,
+    "63": 24,
+    "64": 24,
+    "65": 24,
+    "66": 24,
+    "67": 24,
+    "68": 24,
+    "69": 24,
+    "70": 24,
+    "71": 24,
+    "72": 24,
+    "73": 24,
+    "74": 24,
+    "75": 24,
+    "76": 24,
+    "77": 24,
+    "78": 24,
+    "79": 24,
+    "80": 24,
   };
 
-  const maxCreaturesLevel = _currentLevel => {
-    if (between(_currentLevel, 40, 50)) return "XXXXX";
+  const maxCreaturesLevel = (_currentLevel) => {
+    if (between(_currentLevel, 40, 80)) return "XXXXX";
     if (between(_currentLevel, 20, 39)) return "XXXX";
     if (between(_currentLevel, 10, 19)) return "XXX";
     if (between(_currentLevel, 5, 9)) return "XX";
@@ -198,9 +228,9 @@
   let creaturesExperience =
     25 * (pointsCreatures > 3000 ? 3000 : pointsCreatures);
   let knowledegesExperience =
-    4000 * (numberOfKnowledges > 19 ? 19 : numberOfKnowledges);
-  let skillsExperience = 12000 * (numberOfSkills > 7 ? 7 : numberOfSkills);
-  let powersExperience = 6000 * (numberOfPowers > 12 ? 12 : numberOfPowers);
+    4000 * (numberOfKnowledges > 23 ? 23 : numberOfKnowledges);
+  let skillsExperience = 12000 * (numberOfSkills > 11 ? 11 : numberOfSkills);
+  let powersExperience = 6000 * (numberOfPowers > 10 ? 10 : numberOfPowers);
   let badgesExperience = badges;
 
   let allExperience =
@@ -219,7 +249,7 @@
     currentLevel === 0
       ? 0
       : currentLevel > 50
-      ? 19
+      ? 23
       : maxNumberOfKnowledge[currentLevel.toString()];
 
   const container = document.getElementsByClassName("ipsLayout_content")[1];
